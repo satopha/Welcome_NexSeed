@@ -1,3 +1,11 @@
+
+.fixd{
+	position: fixed;
+	width:100%;
+	margin-top:-70px;
+	z-index: 100;
+}
+
 header{
 	display: flex;
 	justify-content: space-between;
@@ -18,8 +26,17 @@ header{
 	height: 60px;
 }
 
+/*.icon .name{
+	display: flex;
+	align-items: center;
+}*/
+
 .icon .name strong{
 	color: #eae51f;
+}
+
+#margin-for-fixd{
+	margin-top:70px;
 }
 
 .header_right{
@@ -31,7 +48,6 @@ header{
 .header_right li:first-child{
 	margin-right:20px;
 }
-
 
 .welcome{
 	display: flex;
@@ -139,7 +155,6 @@ header{
 }
 
 
-
 .contact{
 	background-color:rgba(29,172,224,.5);
 	display:flex;
@@ -161,13 +176,14 @@ header{
 	margin-right:50px;
 }
 
-.name,.email{
+.form .name,
+.form .email{
 	height:50px;
 	width:400px;
     box-sizing: border-box;
 }
 
-.name{
+.form .name{
 	margin-bottom:20px;
 }
 
@@ -195,6 +211,136 @@ header{
 	color: #1dace0;
 	transition-duration: 500ms;
 }
+
+footer{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #233f51;
+	color:#fff;
+	font-size: 18px;
+	padding:5px;
+}
+
+footer .footer-right{
+	margin-right:80px;
+}
+
+
+/*レスポンシブ*/
+
+/*小型PC用想定*/
+@media screen and (max-width: 1280px;){
+	.img-box{
+		justify-content: space-around;
+	}
+
+	.img-box li{
+		margin-right: 30px;
+	}
+
+}
+
+
+@media screen and (max-width: 960px){
+
+	.img-box{
+		flex-wrap: wrap;
+		align-items:  space-around;
+	}
+
+	.img-box li{
+		margin-right: 0;
+		margin-top:30px;
+	}
+
+	.contact{
+		height:100%;
+		padding:40px 20px;
+	}
+
+	.contact .form{
+		flex-flow: column nowrap;
+		margin:30px 0;
+	}
+
+	.form-left{
+		margin-right: 0;
+		margin-bottom: 30px;
+	}
+
+	.form .name,
+	.form .email{
+		width:80%;
+	}
+
+	.form .inquiry{
+		width:80%;
+	}
+
+	.contact button{
+		font-size: 20px;
+		padding:5px 40px;
+		box-sizing: border-box;
+	}
+}
+
+@media screen and (max-width: 480px){
+	body{
+	min-width: 375px;
+	}
+
+	.header_right,
+	.icon .name{
+		display: none;
+	}
+
+	footer .icon{
+		display: none;
+	}
+
+	footer .footer-right{
+		margin:auto;
+	}
+
+	.icon{
+		margin-left:20px;
+	}
+
+	.title{
+		font-size: 30px;
+	}
+
+	.guidline{
+		margin-top:30px;
+		font-size: 24px;
+		font-weight: normal;
+	}
+
+
+	.btn-group{
+	    display: flex;
+	    flex-flow: column nowrap;
+	 	align-items: center;
+	 	margin-top: 40px;
+	}
+
+	.btn{
+		margin-left:0;
+		font-weight: bold;
+		font-size:24px;
+		margin-top:20px;
+		height:48px;
+		width:40%;
+	}
+
+	.btn:first-child{
+		margin-top:0;
+	}
+}
+
+
+
 
 
 
