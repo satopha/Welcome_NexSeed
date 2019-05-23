@@ -14,8 +14,10 @@ header {
   font-size: 18px;
   font-weight: normal;
   text-align: center;
-  line-height: 24px;
+  line-height: normal;
   color: #fff;
+  height: 100%;
+  width: 100%;
   margin: 0;
   padding: 5px 0;
 }
@@ -29,18 +31,24 @@ header .icon {
   color: #fff;
 }
 
+@media only screen and (max-width: 480px) {
+  header .icon {
+    margin-left: 20px;
+  }
+}
+
 header .icon img {
   height: 60px;
 }
 
-header .icon .name strong {
-  color: #eae51f;
-}
-
 @media only screen and (max-width: 480px) {
-  header .icon .name strong {
+  header .icon .name {
     display: none;
   }
+}
+
+header .icon .name strong {
+  color: #eae51f;
 }
 
 header .header_right {
@@ -49,6 +57,11 @@ header .header_right {
   align-items: center;
   flex-direction: initial;
   margin-right: 80px;
+}
+
+header .header_right li:hover {
+  opacity: .5;
+  transition-duration: 500ms;
 }
 
 header .header_right li:first-child {
@@ -69,11 +82,12 @@ header .header_right li:first-child {
   font-size: 16px;
   font-weight: normal;
   text-align: center;
-  line-height: 24px;
+  line-height: normal;
   color: #fff;
-  background-image: url(../img/background1.jpg);
+  background-color: #fff;
   background-repeat: no-repeat;
   background-size: cover;
+  background-image: url("../img/background1.jpg");
   background-attachment: fixed;
   height: 100vh;
 }
@@ -84,6 +98,10 @@ header .header_right li:first-child {
 
 .welcome .title {
   font-size: 64px;
+  font-weight: normal;
+  text-align: center;
+  line-height: normal;
+  color: #fff;
 }
 
 @media only screen and (max-width: 480px) {
@@ -97,7 +115,7 @@ header .header_right li:first-child {
   font-size: 28px;
   font-weight: bold;
   text-align: center;
-  line-height: 24px;
+  line-height: normal;
   color: #fff;
   /*boldは700指定と一緒*/
 }
@@ -108,7 +126,7 @@ header .header_right li:first-child {
     font-size: 24px;
     font-weight: normal;
     text-align: center;
-    line-height: 24px;
+    line-height: normal;
     color: #fff;
   }
 }
@@ -131,30 +149,44 @@ header .header_right li:first-child {
   }
 }
 
+@media only screen and (max-width: 480px) and (max-width: 480px) {
+  .btn-group {
+    display: flex;
+    justify-content: normal;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
 .btn-group .btn {
   height: 55px;
   width: 170px;
-  margin-left: 120px;
+  margin: 0 120px 0 0;
+  padding: 0;
   cursor: pointer;
   font-size: 28px;
   font-weight: bold;
   text-align: center;
-  line-height: 24px;
+  line-height: normal;
   color: #fff;
   border-radius: 10px;
 }
 
 @media only screen and (max-width: 480px) {
   .btn-group .btn {
-    margin: 20px 0 0 0;
+    height: 100%;
+    width: 100%;
+    margin: 20px 0;
     padding: 0;
     font-size: 24px;
     font-weight: bold;
     text-align: center;
-    line-height: 24px;
+    line-height: normal;
     color: #fff;
     height: 48px;
     width: 40%;
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -174,15 +206,24 @@ header .header_right li:first-child {
 }
 
 .btn-group .register:hover {
+  transition-duration: 500ms;
   background-color: #1dace0;
 }
 
 .btn-group .login {
+  margin-right: 0;
   background-color: rgba(234, 227, 35, 0.5);
   border: 3px solid rgba(234, 227, 35, 0.5);
 }
 
+@media only screen and (max-width: 480px) {
+  .btn-group .login {
+    margin: 30px 0 0 0;
+  }
+}
+
 .btn-group .login:hover {
+  transition-duration: 500ms;
   background-color: #eae323;
 }
 
@@ -192,13 +233,17 @@ header .header_right li:first-child {
 
 .curriculm .sub-title {
   font-size: 36px;
-  font-weight: normal;
+  font-weight: bold;
   text-align: center;
-  line-height: 24px;
-  color: #fff;
+  line-height: normal;
+  color: #000;
 }
 
 .curriculm .img-box {
+  display: flex;
+  justify-content: center;
+  align-items: normal;
+  flex-direction: initial;
   margin: 50px 0;
 }
 
@@ -217,8 +262,10 @@ header .header_right li:first-child {
 }
 
 .curriculm .img-box li img {
-  width: 300px;
   height: 300px;
+  width: 300px;
+  margin: 0;
+  padding: 0;
 }
 
 .curriculm .img-box li span {
@@ -244,6 +291,8 @@ header .header_right li:first-child {
     align-items: space-around;
   }
   .curriculm .img-box li {
+    height: 100%;
+    width: 100%;
     margin: 30px 0 0 0;
     padding: 0;
   }
@@ -251,32 +300,38 @@ header .header_right li:first-child {
 
 .contact {
   background-color: rgba(29, 172, 224, 0.5);
-  height: 350px;
   display: flex;
   justify-content: normal;
   align-items: normal;
   flex-direction: column;
-  margin: 50 0 0 0;
-  padding: 0;
+  height: 350px;
+  width: 100%;
+  margin: 50px 0 0 0;
+  padding: 50px 0 0 0;
   text-align: center;
 }
 
 @media only screen and (max-width: 960px) {
   .contact {
-    height: 100%;
-    padding: 40px 20px;
+    height: 450px;
   }
   .contact li {
+    height: 100%;
+    width: 100%;
     margin: 30px 0 0 0;
     padding: 0;
   }
 }
 
+.contact .sub-title {
+  font-size: 36px;
+}
+
 .contact .form {
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  align-items: normal;
+  flex-direction: initial;
   margin: 50px 0 40px;
 }
 
@@ -286,6 +341,12 @@ header .header_right li:first-child {
 
 @media only screen and (max-width: 960px) {
   .contact .form .form-left {
+    margin: 0 0	30px 0;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .contact .form {
     flex-flow: column nowrap;
     margin: 30px 0;
   }
@@ -295,6 +356,8 @@ header .header_right li:first-child {
 .contact .form .email {
   height: 50px;
   width: 400px;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -312,6 +375,8 @@ header .header_right li:first-child {
 .contact .form .inquiry {
   height: 120px;
   width: 400px;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -322,32 +387,30 @@ header .header_right li:first-child {
 }
 
 .contact button {
-  background-color: #1dace0;
-  padding: 15px 30px;
-  border-radius: 5px;
-  font-size: 24px;
-  font-weight: normal;
-  text-align: center;
-  line-height: 24px;
-  color: #fff;
+  padding: 15px 20px;
   border: solid 2px #1dace0;
+  border-radius: 3px;
+  font-size: 24px;
+  color: #fff;
+  background-color: #1dace0;
   box-sizing: border-box;
   transition-duration: 500ms;
 }
 
 @media only screen and (max-width: 960px) {
   .contact button {
-    font-size: 20px;
     padding: 5px 40px;
+    border: solid 2px #1dace0;
+    border-radius: 3px;
+    font-size: 24px;
+    color: #fff;
+    background-color: #1dace0;
     box-sizing: border-box;
   }
 }
 
 .contact button:hover {
-  background-color: #fff;
-  border: solid 2px #1dace0;
-  box-sizing: border-box;
-  color: #1dace0;
+  opacity: .5;
   transition-duration: 500ms;
 }
 
@@ -356,12 +419,12 @@ footer {
   justify-content: space-between;
   align-items: center;
   flex-direction: initial;
-  background-color: #233f51;
   font-size: 18px;
   font-weight: normal;
   text-align: center;
-  line-height: 24px;
+  line-height: normal;
   color: #fff;
+  background-color: #233f51;
   padding: 5px;
 }
 
@@ -371,8 +434,27 @@ footer .footer-right {
 
 @media only screen and (max-width: 480px) {
   footer .footer-right {
+    height: 100%;
+    width: 100%;
     margin: auto;
+    padding: 0;
   }
+}
+
+footer .icon {
+  display: flex;
+  justify-content: normal;
+  align-items: center;
+  flex-direction: initial;
+  margin-left: 80px;
+}
+
+footer .icon strong {
+  color: #eae51f;
+}
+
+footer .icon img {
+  height: 60px;
 }
 
 @media only screen and (max-width: 480px) {

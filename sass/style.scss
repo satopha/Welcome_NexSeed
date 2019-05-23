@@ -4,7 +4,6 @@ $white:#fff;
 $subcolor: #eae51f;
 $maincolor:#1dace0;
 
-
 @mixin none{
 	display: none;
 }
@@ -16,7 +15,7 @@ $maincolor:#1dace0;
 	flex-direction:$fd;
 }
 
-@mixin font($fs:16px,$fw:normal,$ta:center,$lh:24px,$c:#fff){
+@mixin font($fs:16px,$fw:normal,$ta:center,$lh:normal,$c:#fff){
 	font-size:$fs;
 	font-weight:$fw;
 	text-align: $ta;
@@ -24,9 +23,27 @@ $maincolor:#1dace0;
 	color:$c;
 }
 
-@mixin space($m:0,$p:0){
+@mixin space($h:100%,$w:100%,$m:0,$p:0){
+	height: $h;
+	width: $w;
 	margin:$m;
 	padding:$p;
+}
+
+@mixin bg($bg-c:#fff,$bg-r:no-repeat,$bg-s:cover){
+	background-color:$bg-c;
+	background-repeat:$bg-r;
+	background-size:$bg-s;
+}
+
+@mixin button($b-p:0,$b-b:none,$b-br:1px,$b-fs:12px,$b-c:#fff,$b-bg-c:#000,$b-bs:border-box){
+		padding:$b-p;
+		border:$b-b;
+		border-radius:$b-br;
+		font-size:$b-fs;
+		color:$b-c;
+		background-color:$b-bg-c;
+		box-sizing:$b-bs;
 }
 
 $breakpoints:(
@@ -53,45 +70,52 @@ body{
 
 header{
 	@include flex($jc:space-between);
-	background-color:$maincolor;
+		background-color:$maincolor;
 	@include font($fs:18px,$c:$white);
 	@include space($p:5px 0);
 
 	.icon{
-	@include flex($ai:center);
-		margin-left: 80px;
-		color: $white;
+		@include flex($ai:center);
+			margin-left: 80px;
+			color: $white;
+			@include mediaq(s){
+				margin-left:20px;
+			}
 	}
 	.icon img{
 		height: 60px;
 	}
-	.icon .name strong{
-		color:$subcolor;
-	@include mediaq(s){
+	.icon .name{
+		@include mediaq(s){
 			display: none;
 		}
+	}
+	.icon .name strong{
+		color:$subcolor;
 	}
 	.header_right{
 		@include flex($ai:center);
 		margin-right: 80px;
 		li{
+			&:hover{
+			opacity:.5;
+			transition-duration:500ms;
+			}
 			&:first-child{
 				margin-right:20px;
 			}
 		}
-	@include mediaq(s){
-		display: none;
+		@include mediaq(s){
+			display: none;
 		}
 	}
-
 }
 
 .welcome{
 	@include flex($jc:center,$fd:column);
 	@include  font($ta:center,$c:$white);
-	background-image: url(../img/background1.jpg);
-	background-repeat: no-repeat;
-	background-size: cover;
+	@include bg($bg-c:#fff,$bg-r:no-repeat,$bg-s:cover);
+	background-image: url("../img/background1.jpg");
 	background-attachment: fixed;
 	height: 100vh;
 
@@ -100,7 +124,7 @@ header{
 	}
 
 	.title{
-		font-size: 64px;
+		@include font($fs:64px);
 		@include mediaq(s){
 			font-size: 30px;
 			}
@@ -125,21 +149,21 @@ header{
 	margin-top: 60px;
 		@include mediaq(s){
 		@include flex($ai:center,$fd:column nowrap);
+		@include mediaq(s){
+			@include flex($fd:column,$ai:center);
+			}
 		 	margin-top: 40px;
 		}
 	.btn{
-		height: 55px;
-		width:170px;
-		margin-left:120px;
+		@include space($h:55px,$w:170px,$m:0 120px 0 0);
 		cursor: pointer;
 		@include  font($fs:28px,$fw:bold,$c:$white);
 		border-radius: 10px;
 
 		@include mediaq(s){
-			@include  space($m:20px 0 0 0);
+			@include  space($m:20px 0,$p:0);
 			@include  font($fs:24px,$fw:bold);
-			height:48px;
-			width:40%;	
+			@include space($h:48px,$w:40%);
 		}
 
 		&:first-child{
@@ -153,14 +177,21 @@ header{
 		background-color:rgba(29,172,224,.5);
 		border: 3px solid rgba(29,172,224,.5);
 		&:hover{
-			background-color:rgb(29,172,224);		
+			transition-duration: 500ms;
+			background-color:rgb(29,172,224);
 		}
 	}
+
 	.login{
+		margin-right:0;
+		@include mediaq(s){
+		margin:30px 0 0 0;
+		}
 		background-color:rgba(234,227,35,.5);
 		border: 3px solid rgba(234,227,35,.5);
 		&:hover{
-			background-color:rgb(234,227,35);		
+			transition-duration:500ms; 
+			background-color:rgb(234,227,35);
 		}
 	}
 }
@@ -168,9 +199,10 @@ header{
 .curriculm{
 	margin-top: 50px;
 	.sub-title{
-		@include  font($fs:36px,$ta:center,);
+		@include  font($fs:36px,$ta:center,$c:#000,$fw:bold);
 	}
 	.img-box{
+		@include flex($jc:center);
 		margin:50px 0;
 		li{
 		@include flex($ai:center,$fd:column);/*liとaのタグを縦に整列*/
@@ -180,8 +212,7 @@ header{
 				margin-right:0;
 			}
 			img{
-				width:300px;
-				height:300px;
+				@include space($h:300px,$w:300px);
 			}
 			span{
 				font-size: 24px;
@@ -206,36 +237,38 @@ header{
 	}
 
 .contact{
+
 	background-color:rgba(29,172,224,.5);
-	height: 350px;
 	@include flex($fd:column);
-	@include  space(50 0 0 0);
+	@include  space($h:350px,$m:50px 0 0 0,$p:50px 0 0 0);
 	text-align: center;
 
 	@include mediaq(m){
-		height:100%;
-		padding:40px 20px;
+			height:450px;
 			li{
 				@include  space($m:30px 0 0 0);
 			}
 		}
-
+	.sub-title{
+		font-size:36px;
+	}
 	& .form{
-		@include flex($jc:center,$ai:center,$fd:column);
+		@include flex($jc:center);
 		margin: 50px 0 40px;
 		.form-left{
 			margin-right: 50px;
-
+			@include mediaq(m){
+				margin: 0 0	30px 0;
+			}
+		}
 		@include mediaq(m){
 			flex-flow: column nowrap;
 			margin:30px 0;
 			}
-		}
 
 		& .name,
 		& .email{
-			height: 50px;
-			width: 400px;
+			@include space($h:50px,$w:400px);
 		    box-sizing: border-box;
 		@include mediaq(m){
 			width:80%;
@@ -246,8 +279,7 @@ header{
 			margin-bottom: 20px;
 		}
 		.inquiry{
-			height: 120px;
-			width: 400px;
+			@include space($h:120px,$w:400px);
 		    box-sizing: border-box;
 		@include mediaq(m){
 			width:80%;
@@ -256,25 +288,15 @@ header{
 	}
 
 	& button{
-		background-color: $maincolor;
-		padding: 15px 30px;
-		border-radius: 5px;
-		@include  font($fs:24px,$c:$white);
-		border: solid 2px $maincolor;
-		box-sizing: border-box;
+		@include button($b-p:15px 20px,$b-b:solid 2px $maincolor,$b-br:3px,$b-fs:24px,$b-c:$white,$b-bg-c:$maincolor);
 		transition-duration: 500ms;
 
 		@include mediaq(m){
-			font-size: 20px;
-			padding:5px 40px;
-			box-sizing: border-box;
+			@include button($b-p:5px 40px,$b-b:solid 2px $maincolor,$b-br:3px,$b-fs:24px,$b-c:$white,$b-bg-c:$maincolor);
 			}
 
 		&:hover{
-			background-color:$white;
-			border: solid 2px $maincolor;
-			box-sizing: border-box;
-			color: $maincolor;
+			opacity: .5;
 			transition-duration: 500ms;
 		}
 	}
@@ -282,20 +304,28 @@ header{
 
 footer{
 	@include flex($jc:space-between,$ai:center);
-	background-color: #233f51;
 	@include  font($fs:18px,$c:$white);
+	background-color: #233f51;
 	padding: 5px;
 	 .footer-right{
-	margin-right: 80px;
+		margin-right: 80px;
 		@include mediaq(s){
-			margin:auto;
+			@include space($m:auto,$p:0);
+
 		}
 	}
-
 	.icon{
+		strong{
+			color:$subcolor;
+		}
+		@include flex($ai:center);
+			margin-left:80px;
+			img {
+				height:60px;
+			}
 		@include mediaq(s){
-		margin-left:20px;
-		display: none;
+			margin-left:20px;
+			display: none;
 		}
 	}
 }
