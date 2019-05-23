@@ -1,0 +1,302 @@
+@import "_res.scss";
+
+$white:#fff;
+$subcolor: #eae51f;
+$maincolor:#1dace0;
+
+
+@mixin none{
+	display: none;
+}
+
+@mixin flex($jc:normal,$ai:normal,$fd:initial){
+	display:flex;
+	justify-content:$jc;
+	align-items:$ai;
+	flex-direction:$fd;
+}
+
+@mixin font($fs:16px,$fw:normal,$ta:center,$lh:24px,$c:#fff){
+	font-size:$fs;
+	font-weight:$fw;
+	text-align: $ta;
+	line-height:$lh;
+	color:$c;
+}
+
+@mixin space($m:0,$p:0){
+	margin:$m;
+	padding:$p;
+}
+
+$breakpoints:(
+s: "only screen and (max-width:480px)",
+m: "only screen and (max-width:960px)",
+l: "only screen and (max-width:1280)",
+);
+
+@mixin mediaq($breakpoint){
+	@if map-has-key($breakpoints, $breakpoint){
+		@media #{map-get($breakpoints, $breakpoint)}{
+			@content;
+		}
+	}@else{
+		@error "$breakpointに#{$breakpoint}というキーはありません";
+	}
+}
+
+body{
+	@include mediaq(s){
+		min-width: 375px;
+		}
+	}
+
+header{
+	@include flex($jc:space-between);
+	background-color:$maincolor;
+	@include font($fs:18px,$c:$white);
+	@include space($p:5px 0);
+
+	.icon{
+	@include flex($ai:center);
+		margin-left: 80px;
+		color: $white;
+	}
+	.icon img{
+		height: 60px;
+	}
+	.icon .name strong{
+		color:$subcolor;
+	@include mediaq(s){
+			display: none;
+		}
+	}
+	.header_right{
+		@include flex($ai:center);
+		margin-right: 80px;
+		li{
+			&:first-child{
+				margin-right:20px;
+			}
+		}
+	@include mediaq(s){
+		display: none;
+		}
+	}
+
+}
+
+.welcome{
+	@include flex($jc:center,$fd:column);
+	@include  font($ta:center,$c:$white);
+	background-image: url(../img/background1.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	height: 100vh;
+
+	#margin-for-fixd{
+		margin-top:70px;
+	}
+
+	.title{
+		font-size: 64px;
+		@include mediaq(s){
+			font-size: 30px;
+			}
+	}
+
+	.guidline{
+		margin-top:50px;
+		@include  font($fs:28px,$fw:bold);/*boldは700指定と一緒*/
+		@include mediaq(s){
+			margin-top:30px;
+			@include  font($fs:24px,$fw:normal);
+		}
+	li{
+		&:not(:first-child){
+			margin-top: 16px;
+			}
+		}
+	}
+}
+
+.btn-group{
+	margin-top: 60px;
+		@include mediaq(s){
+		@include flex($ai:center,$fd:column nowrap);
+		 	margin-top: 40px;
+		}
+	.btn{
+		height: 55px;
+		width:170px;
+		margin-left:120px;
+		cursor: pointer;
+		@include  font($fs:28px,$fw:bold,$c:$white);
+		border-radius: 10px;
+
+		@include mediaq(s){
+			@include  space($m:20px 0 0 0);
+			@include  font($fs:24px,$fw:bold);
+			height:48px;
+			width:40%;	
+		}
+
+		&:first-child{
+			margin-left:0;
+			@include mediaq(s){
+				margin-top:0;
+			}
+		}
+	}
+	.register{
+		background-color:rgba(29,172,224,.5);
+		border: 3px solid rgba(29,172,224,.5);
+		&:hover{
+			background-color:rgb(29,172,224);		
+		}
+	}
+	.login{
+		background-color:rgba(234,227,35,.5);
+		border: 3px solid rgba(234,227,35,.5);
+		&:hover{
+			background-color:rgb(234,227,35);		
+		}
+	}
+}
+
+.curriculm{
+	margin-top: 50px;
+	.sub-title{
+		@include  font($fs:36px,$ta:center,);
+	}
+	.img-box{
+		margin:50px 0;
+		li{
+		@include flex($ai:center,$fd:column);/*liとaのタグを縦に整列*/
+			text-align: center;
+			margin-right: 60px;
+			&:last-child{
+				margin-right:0;
+			}
+			img{
+				width:300px;
+				height:300px;
+			}
+			span{
+				font-size: 24px;
+				margin-top: 20px;
+			}
+		}
+			@include media{
+				@include flex($jc:space-around);
+				li{
+					margin-right: 30px;
+				}
+			}
+			@include mediaq(m){
+				flex-wrap: wrap;
+				align-items:  space-around;
+				li{
+				@include  space($m:30px 0 0 0);
+				}
+			}
+
+		}
+	}
+
+.contact{
+	background-color:rgba(29,172,224,.5);
+	height: 350px;
+	@include flex($fd:column);
+	@include  space(50 0 0 0);
+	text-align: center;
+
+	@include mediaq(m){
+		height:100%;
+		padding:40px 20px;
+			li{
+				@include  space($m:30px 0 0 0);
+			}
+		}
+
+	& .form{
+		@include flex($jc:center,$ai:center,$fd:column);
+		margin: 50px 0 40px;
+		.form-left{
+			margin-right: 50px;
+
+		@include mediaq(m){
+			flex-flow: column nowrap;
+			margin:30px 0;
+			}
+		}
+
+		& .name,
+		& .email{
+			height: 50px;
+			width: 400px;
+		    box-sizing: border-box;
+		@include mediaq(m){
+			width:80%;
+			}
+		}
+
+		& .name{
+			margin-bottom: 20px;
+		}
+		.inquiry{
+			height: 120px;
+			width: 400px;
+		    box-sizing: border-box;
+		@include mediaq(m){
+			width:80%;
+			}
+		}
+	}
+
+	& button{
+		background-color: $maincolor;
+		padding: 15px 30px;
+		border-radius: 5px;
+		@include  font($fs:24px,$c:$white);
+		border: solid 2px $maincolor;
+		box-sizing: border-box;
+		transition-duration: 500ms;
+
+		@include mediaq(m){
+			font-size: 20px;
+			padding:5px 40px;
+			box-sizing: border-box;
+			}
+
+		&:hover{
+			background-color:$white;
+			border: solid 2px $maincolor;
+			box-sizing: border-box;
+			color: $maincolor;
+			transition-duration: 500ms;
+		}
+	}
+}
+
+footer{
+	@include flex($jc:space-between,$ai:center);
+	background-color: #233f51;
+	@include  font($fs:18px,$c:$white);
+	padding: 5px;
+	 .footer-right{
+	margin-right: 80px;
+		@include mediaq(s){
+			margin:auto;
+		}
+	}
+
+	.icon{
+		@include mediaq(s){
+		margin-left:20px;
+		display: none;
+		}
+	}
+}
+
