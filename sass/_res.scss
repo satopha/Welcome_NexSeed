@@ -1,7 +1,70 @@
 
+$white:#fff;
+$subcolor: #eae51f;
+$maincolor:#1dace0;
+
+////////////////////////////////////////////////
+
 @mixin media($width:1280){
 	@media only screen and (max-width:$width){
-		// @includeの中身を呼び出す
 		@content;
+	}
+}
+
+@mixin none{
+	display: none;
+}
+
+@mixin flex($jc:normal,$ai:normal,$fd:initial){
+	display:flex;
+	justify-content:$jc;
+	align-items:$ai;
+	flex-direction:$fd;
+}
+
+@mixin font($fs:16px,$fw:normal,$ta:center,$lh:normal,$c:#fff){
+	font-size:$fs;
+	font-weight:$fw;
+	text-align: $ta;
+	line-height:$lh;
+	color:$c;
+}
+
+@mixin space($h:100%,$w:100%,$m:0,$p:0){
+	height: $h;
+	width: $w;
+	margin:$m;
+	padding:$p;
+}
+
+@mixin bg($bg-c:#fff,$bg-r:no-repeat,$bg-s:cover){
+	background-color:$bg-c;
+	background-repeat:$bg-r;
+	background-size:$bg-s;
+}
+
+@mixin button($b-p:0,$b-b:none,$b-br:1px,$b-fs:12px,$b-c:#fff,$b-bg-c:#000,$b-bs:border-box){
+		padding:$b-p;
+		border:$b-b;
+		border-radius:$b-br;
+		font-size:$b-fs;
+		color:$b-c;
+		background-color:$b-bg-c;
+		box-sizing:$b-bs;
+}
+
+$breakpoints:(
+s: "only screen and (max-width:480px)",
+m: "only screen and (max-width:960px)",
+l: "only screen and (max-width:1280)",
+);
+
+@mixin mediaq($breakpoint){
+	@if map-has-key($breakpoints, $breakpoint){
+		@media #{map-get($breakpoints, $breakpoint)}{
+			@content;
+		}
+	}@else{
+		@error "$breakpointに#{$breakpoint}というキーはありません";
 	}
 }
